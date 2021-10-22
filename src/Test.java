@@ -2,44 +2,45 @@ import java.util.Random;
 
 public class Test {
     public static void main(String[] args) {
+        EmployeeFactory employeeFactory =  new EmployeeFactory();
+        Employee[] employees  = employeeFactory.generateEmployees(10);
+        EmployeeService employeeService = new EmployeeService(employees);
+        Employee employee  = new Employee(2, "Игорь", 30, 2000.00, 40, "мужчина", 30);
 
-        Employee employee = new Employee(1, "Вася", 28, 450,
-                30, "male", 15.5);
-        Employee employee2 = new Employee(2, "Петя", 29, 400,
-                30, "male", 15.5);
-        Employee employee3 = new Employee(3, "Коля", 29, 600,
-                30, "male", 15.5);
-        Employee employee4 = new Employee(4, "Коля", 29, 590,
-                30, "male", 15.5);
-        Employee employee5 = new Employee(4, "Кол", 29, 400,
-                30, "male", 15.5);
+        employeeService.printEmployees();
 
-        Employee[] mas = new Employee[4];
-        mas[0] = employee;
-        mas[1] = employee2;
-        mas[2] = employee3;
-        mas[3] = employee4;
-        EmployeeService employeeService = new EmployeeService(mas);
+        System.out.println( "Общая сумма денег необходимая для зарплаты: "  + employeeService.calculateSalaryAndBonus() );
 
-        // employeeService.employees = mas;
-        // employeeService.printEmployees();
-        // System.out.println(employeeService.getById(1));
-        //System.out.println(employeeService.getByName("Petya"));
-        EmployeeService emp = new EmployeeService(mas);
-        //emp.getByName("Игорь");
-       // emp.add(employee);
-       // emp.printEmployees();
-       // emp.remove(1);
+        System.out.println( "SERCH BY ID   =================================== " );
+        System.out.println(  "getById: " + employeeService.getById(2).toString());
 
-//      emp.printEmployees();
-//        emp.edit(employee5);
-//        emp.printEmployees();
-     // emp.sortByName();
-       // System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
-        //emp.printEmployees();
-      //  System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
-        emp.sortByNameAndSalary();
-        emp.printEmployees();
+        System.out.println( "SERCH BY NAME =================================== " );
+        Employee[] searchEmployer = employeeService.getByName("Вася" );
+            if ( searchEmployer != null ) {
+                System.out.println( "search employee founded");
+            } else {
+                System.out.println( "Search employee not found" );
+            }
+        System.out.println( "SORT BY NAME ==================================== " );
+        employeeService.sortByName();
+        employeeService.printEmployees();
 
+        System.out.println( "SORT BY NAME AND SALARY ========================= " );
+        employeeService.sortByNameAndSalary();
+        employeeService.printEmployees();
+
+        System.out.println( "ADD INFORMATION ============================= " );
+        employeeService.add(employee);
+
+        System.out.println( "REPLACE INFORMATION ============================= " );
+        Employee employeeTwo  = new Employee(2, "Игорь", 30, 2500.00, 40, "мужчина", 40);
+        employee =  employeeService.edit(employeeTwo);
+        System.out.println(employee.toString());
+
+        System.out.println( "REMOVE INFORMATION ============================= " );
+        employeeService.remove(1);
+        for (Employee newEployeeList : employees) {
+            System.out.println(newEployeeList);
+        }
     }
 }
