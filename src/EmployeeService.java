@@ -17,13 +17,14 @@ public class EmployeeService {
         }
     }
 
-    //возвращает количество денег необходимое для выплаты зарплат
+    //возвращает количество денег необходимое дл я выплаты зарплат
     // для всех сотрудников в этом месяце (пробегаем по всем сотрудникам,
     // суммируем зарплату каждого с бонусом каждого)
     double calculateSalaryAndBonus(){
         double totalSalary = 0.0;
         for( Employee employee: employees ){
-            totalSalary += employee.salary + employee.fixedBugs + employee.defaultBugRate;
+//            totalSalary += employee.salary + employee.fixedBugs * employee.defaultBugRate;
+            totalSalary += employee.salary;
         }
         return totalSalary;
     }
@@ -102,7 +103,7 @@ public class EmployeeService {
     Employee edit( Employee newEployeeInformation ){
         Employee  oldEployeeInfarmation = null;
         for ( int i = 0; i < employees.length; i++ ) {
-            oldEployeeInfarmation= employees[i];
+            oldEployeeInfarmation = employees[i];
             if ( newEployeeInformation.id == oldEployeeInfarmation.id ) {
                 employees[i] = newEployeeInformation;
             }
@@ -111,8 +112,8 @@ public class EmployeeService {
         return oldEployeeInfarmation;
     }
 
-//    //находит сотрудника по id, и удаляет его из массива.
-//    // Возвращает ссылку на удаленного сотрудника
+    //находит сотрудника по id, и удаляет его из массива.
+    // Возвращает ссылку на удаленного сотрудника
     Employee remove( long searchId ) {
         Employee removeEmployee = null;
         int indexToRemove = -1;

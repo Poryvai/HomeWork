@@ -14,7 +14,7 @@ public class EmployeeFactory {
             String name = isMale ? nameMale[random.nextInt(nameMale.length)] :
                     nameFemale[random.nextInt(nameFemale.length)];
             int age = random.nextInt(60)+20;
-            double salary = random.nextDouble(5000.00)+200.00;
+            double salary =Math.round((random.nextDouble(5000.00)+200.00) * 100 / 100D);
             int fixedBugs = random.nextInt(100)+1;
             String gender = "";
             if(isMale){
@@ -22,7 +22,7 @@ public class EmployeeFactory {
             }else{
                 gender = "женщина";
             }
-            double defaultBugRate = random.nextDouble(50.00)+10.00;
+            double defaultBugRate = Math.round((random.nextDouble(50.00)+10.00) * 100 / 100D);
             Employee employee = new Employee(id, name, age, salary, fixedBugs, gender, defaultBugRate);
 
             employees[i] = employee;
